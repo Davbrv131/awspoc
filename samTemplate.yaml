@@ -1,0 +1,69 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Parameters: 
+  DynamoDBServicesTableName:
+    Type: String
+  DynamoDBServicesTableHash:
+    Type: String
+Resources:
+  AWSPOCgetallservices:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: AWSPOC_getallservices_lambda_function.getallservices
+      Runtime: nodejs6.10
+      CodeUri: ./
+      Policies: AmazonDynamoDBReadOnlyAccess
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref AWSPOCDynamoDBTableservices
+      Events:
+        GetResource:
+          Type: Api
+          Properties:
+            Path: /awspoc/getallservices
+            Method: get
+  AWSPOCgetservicebyname:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: AWSPOC_getservicebyname_lambda_function.getservicebyname
+      Runtime: nodejs6.10
+      CodeUri: ./
+      Policies: AmazonDynamoDBReadOnlyAccess
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref AWSPOCDynamoDBTableservices
+      Events:
+        GetResource:
+          Type: Api
+          Properties:
+            Path: /awspoc/getservicebyname/{serviceName}
+            Method: get
+  AWSPOCcreateservice:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: AWSPOC_createservice_lambda_function.createservice
+      Runtime: nodejs6.10
+      CodeUri: ./
+      Policies: AmazonDynamoDBFullAccess
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref AWSPOCDynamoDBTableservices
+      Events:
+        GetResource:
+          Type: Api
+          Properties:
+            Path: /awspoc/createservice
+            Method: post
+  AWSPOCDynamoDBTableservices:
+     Type: AWS::DynamoDB::Table
+     Properties: 
+       TableName: !Ref DynamoDBServicesTableName
+       AttributeDefinitions: 
+         - AttributeName: !Ref DynamoDBServicesTableHash
+           AttributeType: S
+       KeySchema: 
+         - AttributeName: !Ref DynamoDBServicesTableHash
+           KeyType: HASH
+       ProvisionedThroughput: 
+         ReadCapacityUnits: 1
+         WriteCapacityUnits: 1
