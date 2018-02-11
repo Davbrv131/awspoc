@@ -1,10 +1,10 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Parameters: 
-  DynamoDBServicesTableName:
-    Type: String
-  DynamoDBServicesTableHash:
-    Type: String
+# Parameters: 
+#   DynamoDBServicesTableName:
+#     Type: String
+#   DynamoDBServicesTableHash:
+#     Type: String
 Resources:
   AWSPOCgetallservices:
     Type: AWS::Serverless::Function
@@ -57,12 +57,12 @@ Resources:
   AWSPOCDynamoDBTableservices:
      Type: AWS::DynamoDB::Table
      Properties: 
-       TableName: !Ref DynamoDBServicesTableName
+       TableName: StenaServices
        AttributeDefinitions: 
-         - AttributeName: !Ref DynamoDBServicesTableHash
+         - AttributeName: serviceName
            AttributeType: S
        KeySchema: 
-         - AttributeName: !Ref DynamoDBServicesTableHash
+         - AttributeName: serviceName
            KeyType: HASH
        ProvisionedThroughput: 
          ReadCapacityUnits: 1
