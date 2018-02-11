@@ -3,7 +3,6 @@ phases:
   install:
     commands:
       - aws cloudformation package --template-file samTemplate.yaml --s3-bucket awspoclambdafunctions
-                                   --parameters ParameterKey=DynamoDBServicesTableHash,ParameterValue=serviceName 
                                    --output-template-file NewSamTemplate.yaml
 artifacts:
   type: zip
