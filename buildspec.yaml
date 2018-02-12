@@ -1,8 +1,4 @@
 version: 0.1
-env:
-  parameter-store:
-    DynamoDBServicesTableName: "Stena_Services"
-    DynamoDBServicesTableHash: "serviceName"
 phases:
   install:
     commands:
