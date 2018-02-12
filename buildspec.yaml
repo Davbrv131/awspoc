@@ -2,7 +2,7 @@ version: 0.1
 phases:
   install:
     commands:
-      - aws cloudformation package --template-file samTemplate.yaml --s3-bucket awspoclambdafunctions
+      - aws cloudformation package --template-file samTemplate.yaml --s3-bucket awspoclambda
                                    --output-template-file NewSamTemplate.yaml
 artifacts:
   type: zip
