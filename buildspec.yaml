@@ -4,7 +4,6 @@ phases:
     commands:
       - aws cloudformation package --template-file samTemplate.yaml --s3-bucket awspoclambdafunctions
                                    --output-template-file NewSamTemplate.yaml
-      - aws cloudformation create-stack --stack-name nuovoStack
 artifacts:
   type: zip
   files:
