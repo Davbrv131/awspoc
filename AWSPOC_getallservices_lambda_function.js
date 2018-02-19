@@ -17,7 +17,13 @@ module.exports.getallservices = (event, context, callback) => {
 
         const response = {
             statusCode: 200,
-            body: JSON.stringify(result.Items)
+            body: JSON.stringify(result.Items),
+            headers: {
+                "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
+                "Access-Control-Allow-Credentials" : true, // Required for cookies, authorization headers with HTTPS,
+                "Access-Control-Allow-Headers" : "Content-Type,X-Amz-Date,Authorization,X-Api-Key",
+                "Access-Control-Allow-Methods" : "*"
+            }
         }
 
         callback(null, response);
