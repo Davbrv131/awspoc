@@ -8,14 +8,9 @@ module.exports.createservice = (event, context, callback) => {
 
     const params = {
         TableName: process.env.TABLE_NAME,
-        // Item: {
-        //     serviceName: data.serviceName,
-        //     status: data.status
-        // }
-
         Item: {
-            serviceName: "new",
-            status: "statusnew"
+            serviceName: data.serviceName,
+            status: data.status
         }
     }
     
